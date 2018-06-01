@@ -12,10 +12,19 @@ body {
     min-height: 100%;
     overflow: auto;
     padding-bottom: 60px;
+    background-color: #221F1F;
 }
 
 .maincolor {
-    background-color: #3D4252;
+    background-color: #831010;
+}
+
+h6 {
+    font-size: 0.3em;
+}
+.item-b {
+    border: 1px solid;
+    border-color: #831010;
 }
 
 .link-color {
@@ -33,6 +42,33 @@ body {
 
 .container-fluid-nav {
     max-width: 1350px;
+}
+
+.flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: flex-start; 
+}
+
+.flex-item {
+    background: #221F1F ;
+    padding: 5px;
+    width: 160px;
+    height: 280px;
+    margin-top: 10px;
+    margin: 10px;
+    line-height: 150px;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
 }
 
 .headers{

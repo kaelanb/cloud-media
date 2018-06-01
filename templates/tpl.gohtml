@@ -24,36 +24,18 @@
             </form>
         </div>
     </nav>
+   
     
     <div class="container-fluid container-fluid-mod">
-	<div class="row">
-		<div class="col-sm">
-			All Shows 
-            <ul class="list-unstyled">
+
+        <h3 class="mt-0 mb-3 text-white">Playing Today </h3>
+            <ul class="flex-container">
 				{{range .Allshows}}
-				<li class="media mb-3">
-                    <img class="mr-3" src="{{.ImageLinks}}" alt="image">
-                    <div class="media-body">
-                        <h6 class="mt-0 mb-1">{{.Name}}</h6>
-                    </div>
+                <li class="flex-item"><img class="mr-3" src="{{.ImageLinks}}" alt="image">
+                        <h6 class="pt-2 mt-0 mb-1">{{.Name}}</h6>
                 </li>
 				{{end}}
 			</ul>
-        </div>
-		<div class="col-sm">
-			Your Shows
-		    <ul class="list-unstyled">
-			    {{range .Myshows}}
-				<li class="media mb-3">
-                    <img class="mr-3" src="{{.ImageLinks}}" alt="image">
-                    <div class="media-body">
-                        <h5 class="mt-0 mb-1">{{.Name}}</h5>
-                    </div>
-                </li>
-                {{end}}
-			</ul>
-		</div>
-	</div>
     </div>
 </div>
 </body>
