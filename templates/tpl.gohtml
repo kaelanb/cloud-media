@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	
+    <link rel="stylesheet" href="assets/css/style.css" TYPE="text/css">
+
+	<title>Show Tracker</title>
+</head>
+<body>
+<div class="main">
+    <nav class="navbar navbar-expand-lg navbar-dark maincolor">
+        <div class="container-fluid container-fluid-nav">
+            <a class="navbar-brand" href="#">Cloud Media</a>
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="index.html">Home</a>
+                </div>
+            
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    
+    <div class="container-fluid container-fluid-mod">
+	<div class="row">
+		<div class="col-sm">
+			All Shows 
+            <ul class="list-unstyled">
+				{{range .Allshows}}
+				<li class="media mb-3">
+                    <img class="mr-3" src="{{.ImageLinks}}" alt="image">
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1">{{.Name}}</h6>
+                    </div>
+                </li>
+				{{end}}
+			</ul>
+        </div>
+		<div class="col-sm">
+			Your Shows
+		    <ul class="list-unstyled">
+			    {{range .Myshows}}
+				<li class="media mb-3">
+                    <img class="mr-3" src="{{.ImageLinks}}" alt="image">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">{{.Name}}</h5>
+                    </div>
+                </li>
+                {{end}}
+			</ul>
+		</div>
+	</div>
+    </div>
+</div>
+</body>
+</html>

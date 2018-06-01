@@ -1,0 +1,59 @@
+img {
+    object-fit: cover;
+    width:150.283px;
+    height:220px;
+}
+
+html, 
+body {
+    height: 100%;
+}
+.main{
+    min-height: 100%;
+    overflow: auto;
+    padding-bottom: 60px;
+}
+
+.maincolor {
+    background-color: #3D4252;
+}
+
+.link-color {
+    color:darkblue;
+}
+.container-fluid-mod {
+    margin-top: 50px;
+    max-width: 1350px;
+}
+
+.container-fluid-mod2 {
+    margin-top: 50px;
+    max-width: 905px;
+}
+
+.container-fluid-nav {
+    max-width: 1350px;
+}
+
+.headers{
+    margin-bottom: 20px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.banner{
+    height: 160px;
+    background-color: #FFFFFF;
+    margin-bottom: 40px;
+   
+}
+
+.footer-style{
+  
+    position: relative;
+    margin-top: -60px;
+    height: 60px;
+    clear: both;
+}
