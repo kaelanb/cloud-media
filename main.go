@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"html/template"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/ryanbradynd05/go-tmdb"
@@ -11,28 +12,39 @@ import (
 
 var tpl *template.Template
 
+//Shows Struct for tv Shows
 type Shows struct {
 	Name       string
 	ImageLinks string
 }
 
-type AllShows []Shows
-type MyShows []Shows
+type allShows []Shows
+type myShows []Shows
 
+//Data Struct that holds data to be rendered into template
 type Data struct {
-	Allshows AllShows
-	Myshows  MyShows
+	Allshows allShows
+	Myshows  myShows
 }
 
 func init() {
-	tpl = template.Must(template.ParseFiles("templates/tpl.gohtml"))
+	tpl = template.Must(template.ParseGlob("templates/*.gohtml"))
 
 }
 
 func main() {
+
+	http.HandleFunc("/", indexHandler)
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+
+	log.Fatal(http.ListenAndServe(":8081", nil))
+
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+
 	tmdb1 := tmdb.Init("5beb2bf1821813990f328d5c98b5fdc5")
 
-	//	options := make(map[string]string)
 	tvInfo, err := tmdb1.GetTvAiringToday(nil)
 	if err != nil {
 		log.Fatal(err)
@@ -43,8 +55,8 @@ func main() {
 		log.Fatalf("readLines: %s", err)
 	}
 
-	var allshows AllShows
-	var myshows MyShows
+	var allshows allShows
+	var myshows myShows
 
 	for _, result := range tvInfo.Results {
 		for _, line := range lines {
@@ -63,7 +75,7 @@ func main() {
 
 	data := &Data{allshows, myshows}
 
-	tplerr := tpl.Execute(os.Stdout, data)
+	tplerr := tpl.ExecuteTemplate(w, "index.gohtml", data)
 	if tplerr != nil {
 		log.Fatalln(tplerr)
 	}
