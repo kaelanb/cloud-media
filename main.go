@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/ryanbradynd05/go-tmdb"
 )
@@ -45,9 +46,21 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmdb1 := tmdb.Init("5beb2bf1821813990f328d5c98b5fdc5")
 
-	tvInfo, err := tmdb1.GetTvAiringToday(nil)
-	if err != nil {
-		log.Fatal(err)
+	var tvInfo *tmdb.TvPagedResults
+	var err error
+	var tvResults []tmdb.TvShort
+	option := make(map[string]string)
+
+	totPages := 1
+
+	for i := 1; i <= totPages; i++ {
+		option["page"] = strconv.Itoa(i)
+		tvInfo, err = tmdb1.GetTvAiringToday(option)
+		if err != nil {
+			log.Fatal(err)
+		}
+		totPages = tvInfo.TotalPages
+		tvResults = append(tvResults, tvInfo.Results...)
 	}
 
 	lines, err := readLines("showlist.txt")
@@ -58,17 +71,18 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	var allshows allShows
 	var myshows myShows
 
-	for _, result := range tvInfo.Results {
+	for _, result := range tvResults {
 		for _, line := range lines {
-			if line == result.OriginalName {
+			if line == result.Name {
 				myshows = append(myshows, Shows{
 					line,
 					"https://image.tmdb.org/t/p/original" + result.PosterPath,
 				})
 			}
 		}
+
 		allshows = append(allshows, Shows{
-			result.OriginalName,
+			result.Name,
 			"https://image.tmdb.org/t/p/original" + result.PosterPath,
 		})
 	}
