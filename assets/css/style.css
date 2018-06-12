@@ -4,6 +4,12 @@ img {
     height:220px;
 }
 
+.item-img {
+	height:220px;
+	width: 150.283px;
+	background-color: #221F1F;
+}
+
 html, 
 body {
     height: 100%;
